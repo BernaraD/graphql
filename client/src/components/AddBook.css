@@ -1,0 +1,25 @@
+label {
+    color: #fff;
+}
+input, select {
+    background-color: #fff;
+    border-radius: 12px;
+    border: 0;
+    box-sizing: border-box;
+    height: 100%;
+    outline: 0;
+    padding: 10px 20px 10px;
+    width: 100%;
+}
+
+button {
+    background-color: #6096B4;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}

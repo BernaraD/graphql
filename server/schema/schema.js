@@ -98,11 +98,12 @@ const RootQuery = new GraphQLObjectType( {
 const Mutation = new GraphQLObjectType( {
     name: 'Mutation',
     fields: {
+
         addAuthor: {
             type: AuthorType,
             args: {
-                name: { type: new GraphQLNonNull(GraphQLString) },
-                age: { type: new GraphQLNonNull(GraphQLInt) },
+                name: { type: new GraphQLNonNull( GraphQLString ) },
+                age: { type: new GraphQLNonNull( GraphQLInt ) },
             },
             resolve(parent, args) {
                 let author = new Author( {
@@ -112,12 +113,13 @@ const Mutation = new GraphQLObjectType( {
                 return author.save();
             }
         },
+
         addBook: {
             type: BookType,
             args: {
                 name: { type: new GraphQLNonNull( GraphQLString ) },
                 genre: { type: new GraphQLNonNull( GraphQLString ) },
-                authorId: { type: new GraphQLNonNull(GraphQLID) }
+                authorId: { type: new GraphQLNonNull( GraphQLID ) }
             },
             resolve(parent, args) {
                 let book = new Book( {
@@ -126,6 +128,29 @@ const Mutation = new GraphQLObjectType( {
                     authorId: args.authorId
                 } );
                 return book.save();
+            }
+        },
+
+        updateBook: {
+            type: BookType,
+            args: {
+                id: {type: GraphQLNonNull(GraphQLID)},
+                name: { type: GraphQLString },
+                genre: { type: GraphQLString },
+                authorId: { type: GraphQLID }
+            },
+            resolve(parent, args) {
+                return Book.findByIdAndUpdate( args.id,
+                    {
+                        $set: {
+                            name: args.name,
+                            genre: args.genre,
+                            authorId: args.authorId
+                        },
+                    },
+                    { new: true }
+                );
+
             }
         }
     }

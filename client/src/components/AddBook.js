@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import "./AddBook.css";
 import { useMutation, useQuery, } from "@apollo/client";
-import { GET_AUTHORS_QUERY, ADD_BOOK_MUTATION, GET_BOOKS_QUERY } from "../queries/queries";
+import { GET_AUTHORS_QUERY, GET_BOOKS_QUERY } from "../queries/queries";
+import { ADD_BOOK_MUTATION } from "../mutations/bookMutations";
 
 
 function AddBook() {
@@ -20,7 +22,8 @@ function AddBook() {
         setNewBook( {
             ...newBook,
             [e.target.name]: e.target.value
-        } )
+        } );
+
     }
 
     const displayAuthors = () => {
@@ -47,7 +50,13 @@ function AddBook() {
                 authorId: authorId
             },
             refetchQueries: [{ query: GET_BOOKS_QUERY}]
-        } )
+        } );
+
+        setNewBook({
+            name: '',
+            genre: '',
+            authorId: ''
+        })
     }
 
     return (
